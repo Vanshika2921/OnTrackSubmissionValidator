@@ -36,6 +36,11 @@ public class SubmissionValidator {
 
             return "File Size Exceeded";
         }
+
+                if (deadlinePassed) {
+
+            return "Submission Closed";
+        }
         return "Submission Accepted";
     }
 
