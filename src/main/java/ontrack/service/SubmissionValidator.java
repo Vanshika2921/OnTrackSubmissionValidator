@@ -31,6 +31,11 @@ public class SubmissionValidator {
             return "Invalid File Type";
         }
 
+                 if (fileSizeInMb <= 0 ||
+                fileSizeInMb > 10) {
+
+            return "File Size Exceeded";
+        }
         return "Submission Accepted";
     }
 
