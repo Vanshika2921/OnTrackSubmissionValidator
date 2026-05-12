@@ -41,6 +41,10 @@ public class SubmissionValidator {
 
             return "Submission Closed";
         }
+                if (duplicateSubmission) {
+
+            return "Duplicate Submission";
+        }
         return "Submission Accepted";
     }
 
