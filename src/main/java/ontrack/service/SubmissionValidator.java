@@ -7,6 +7,8 @@ package ontrack.service;
  */
 public class SubmissionValidator {
 
+    private static final int MAX_FILE_SIZE_MB = 10;
+
     public String validateSubmission(
             String studentId,
             String fileName,
@@ -31,20 +33,22 @@ public class SubmissionValidator {
             return "Invalid File Type";
         }
 
-                 if (fileSizeInMb <= 0 ||
-                fileSizeInMb > 10) {
+        if (fileSizeInMb <= 0 ||
+                fileSizeInMb > MAX_FILE_SIZE_MB) {
 
             return "File Size Exceeded";
         }
 
-                if (deadlinePassed) {
+        if (deadlinePassed) {
 
             return "Submission Closed";
         }
-                if (duplicateSubmission) {
+
+        if (duplicateSubmission) {
 
             return "Duplicate Submission";
         }
+
         return "Submission Accepted";
     }
 
