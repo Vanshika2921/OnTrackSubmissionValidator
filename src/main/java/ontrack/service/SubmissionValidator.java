@@ -1,7 +1,7 @@
 package ontrack.service;
 
 /**
- * Assignment submission validation service for a simplified OnTrack system.
+ * Final assignment submission validation service for a simplified OnTrack system.
  * 
  * @author Vanshika
  */
