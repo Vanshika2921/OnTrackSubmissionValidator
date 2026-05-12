@@ -25,7 +25,7 @@ public class SubmissionValidatorTest {
                         false);
 
         Assert.assertEquals(
-                "Submission Accepted",
-                result);
+        "Wrong Output",
+        result);
     }
 }
