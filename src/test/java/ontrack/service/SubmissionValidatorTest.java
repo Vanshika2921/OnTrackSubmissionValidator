@@ -269,4 +269,64 @@ public class SubmissionValidatorTest {
 
         Assert.assertFalse("Submission Closed".equals(result));
     }
+
+        @Test
+    public void testNonDuplicateSubmissionShouldBeAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, false);
+
+        Assert.assertEquals("Submission Accepted", result);
+    }
+
+    @Test
+    public void testDuplicatePdfSubmissionShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, true);
+
+        Assert.assertEquals("Duplicate Submission", result);
+    }
+
+    @Test
+    public void testDuplicateDocxSubmissionShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.docx", 5, false, true);
+
+        Assert.assertEquals("Duplicate Submission", result);
+    }
+
+    @Test
+    public void testDuplicateSubmissionWithValidStudentIdShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, true);
+
+        Assert.assertEquals("Duplicate Submission", result);
+    }
+
+    @Test
+    public void testDuplicateSubmissionWithValidFileSizeShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 10, false, true);
+
+        Assert.assertEquals("Duplicate Submission", result);
+    }
+
+    @Test
+    public void testDuplicateFlagTrueShouldNotReturnSubmissionAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, true);
+
+        Assert.assertFalse("Submission Accepted".equals(result));
+    }
 }
