@@ -7,4 +7,13 @@ package ontrack.service;
  */
 public class SubmissionValidator {
 
+    public String validateSubmission(
+            String studentId,
+            String fileName,
+            int fileSizeInMb,
+            boolean deadlinePassed,
+            boolean duplicateSubmission) {
+
+        return "Submission Accepted";
+    }
 }
