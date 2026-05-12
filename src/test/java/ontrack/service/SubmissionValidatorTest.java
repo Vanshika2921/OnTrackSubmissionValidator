@@ -149,4 +149,64 @@ public class SubmissionValidatorTest {
 
         Assert.assertEquals("Invalid File Type", result);
     }
+
+        @Test
+    public void testOneMbFileShouldBeAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 1, false, false);
+
+        Assert.assertEquals("Submission Accepted", result);
+    }
+
+    @Test
+    public void testTenMbFileShouldBeAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 10, false, false);
+
+        Assert.assertEquals("Submission Accepted", result);
+    }
+
+    @Test
+    public void testElevenMbFileShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 11, false, false);
+
+        Assert.assertEquals("File Size Exceeded", result);
+    }
+
+    @Test
+    public void testFifteenMbFileShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 15, false, false);
+
+        Assert.assertEquals("File Size Exceeded", result);
+    }
+
+    @Test
+    public void testZeroMbFileShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 0, false, false);
+
+        Assert.assertEquals("File Size Exceeded", result);
+    }
+
+    @Test
+    public void testNegativeFileSizeShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", -1, false, false);
+
+        Assert.assertEquals("File Size Exceeded", result);
+    }
 }
