@@ -20,6 +20,26 @@ public class SubmissionValidator {
             return "Invalid Student ID";
         }
 
+        if (fileName == null ||
+                fileName.trim().isEmpty()) {
+
+            return "Invalid File";
+        }
+
+        if (!isAllowedFileType(fileName)) {
+
+            return "Invalid File Type";
+        }
+
         return "Submission Accepted";
+    }
+
+    private boolean isAllowedFileType(String fileName) {
+
+        String lowerCaseFileName =
+                fileName.toLowerCase();
+
+        return lowerCaseFileName.endsWith(".pdf") ||
+                lowerCaseFileName.endsWith(".docx");
     }
 }
