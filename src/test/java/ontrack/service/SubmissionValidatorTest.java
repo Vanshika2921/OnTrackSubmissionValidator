@@ -11,7 +11,7 @@ import org.junit.Test;
 public class SubmissionValidatorTest {
 
     @Test
-    public void testValidSubmissionShouldBeAccepted() {
+    public void testValidStudentIdShouldBeAccepted() {
 
         SubmissionValidator validator =
                 new SubmissionValidator();
@@ -25,7 +25,121 @@ public class SubmissionValidatorTest {
                         false);
 
         Assert.assertEquals(
-        "Submission Accepted",
-        result);
+                "Submission Accepted",
+                result);
+    }
+
+    @Test
+    public void testShortStudentIdShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        "12345",
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
+    }
+
+    @Test
+    public void testLongStudentIdShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        "22515932899",
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
+    }
+
+    @Test
+    public void testNullStudentIdShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        null,
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
+    }
+
+    @Test
+    public void testEmptyStudentIdShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        "",
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
+    }
+
+    @Test
+    public void testStudentIdWithLettersShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        "225ABC328",
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
+    }
+
+    @Test
+    public void testStudentIdWithSpecialCharactersShouldBeRejected() {
+
+        SubmissionValidator validator =
+                new SubmissionValidator();
+
+        String result =
+                validator.validateSubmission(
+                        "22515@328",
+                        "report.pdf",
+                        5,
+                        false,
+                        false);
+
+        Assert.assertEquals(
+                "Invalid Student ID",
+                result);
     }
 }
