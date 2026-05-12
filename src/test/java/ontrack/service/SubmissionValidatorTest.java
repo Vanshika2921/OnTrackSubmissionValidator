@@ -209,4 +209,64 @@ public class SubmissionValidatorTest {
 
         Assert.assertEquals("File Size Exceeded", result);
     }
+
+        @Test
+    public void testSubmissionBeforeDeadlineShouldBeAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, false);
+
+        Assert.assertEquals("Submission Accepted", result);
+    }
+
+    @Test
+    public void testSubmissionAfterDeadlineShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, true, false);
+
+        Assert.assertEquals("Submission Closed", result);
+    }
+
+    @Test
+    public void testDeadlinePassedWithDocxFileShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.docx", 5, true, false);
+
+        Assert.assertEquals("Submission Closed", result);
+    }
+
+    @Test
+    public void testDeadlinePassedWithMaximumFileSizeShouldBeRejected() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 10, true, false);
+
+        Assert.assertEquals("Submission Closed", result);
+    }
+
+    @Test
+    public void testDeadlinePassedShouldNotReturnSubmissionAccepted() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, true, false);
+
+        Assert.assertFalse("Submission Accepted".equals(result));
+    }
+
+    @Test
+    public void testDeadlineNotPassedShouldNotCloseSubmission() {
+        SubmissionValidator validator = new SubmissionValidator();
+
+        String result = validator.validateSubmission(
+                "225159328", "report.pdf", 5, false, false);
+
+        Assert.assertFalse("Submission Closed".equals(result));
+    }
 }
